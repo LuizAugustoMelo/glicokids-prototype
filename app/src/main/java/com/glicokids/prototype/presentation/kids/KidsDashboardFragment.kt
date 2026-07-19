@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.glicokids.prototype.databinding.FragmentKidsDashboardBinding
-import com.glicokids.prototype.presentation.parents.ParentSecurityActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,8 +29,16 @@ class KidsDashboardFragment : Fragment() {
 
         binding.btnParentArea.setOnClickListener {
             // Requisito Módulo 2: Navegação via Intent com Passagem de Dados (Extras)
-            val intent = Intent(requireContext(), ParentSecurityActivity::class.java).apply {
-                putExtra("CHILD_NAME", "Glico Herói")
+            val intent = Intent(requireContext(), com.glicokids.prototype.presentation.parents.ParentSecurityActivity::class.java).apply {
+                putExtra("CHILD_NAME", "Lucas")
+            }
+            startActivity(intent)
+        }
+
+        binding.btnNewMeal.setOnClickListener {
+            // Módulo 3: Abrindo Missão da Refeição via Intent
+            val intent = Intent(requireContext(), NewMealActivity::class.java).apply {
+                putExtra("CHILD_NAME", "Lucas")
             }
             startActivity(intent)
         }

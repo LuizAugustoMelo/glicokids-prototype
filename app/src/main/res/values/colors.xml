@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Night/Space Tokens -->
+    <color name="night_deep">#221650</color>
+    <color name="night">#2A1E5C</color>
+    <color name="night_mid">#3A2380</color>
+
+    <!-- Primary/Action Tokens -->
+    <color name="primary">#7C4DFF</color>
+    <color name="primary_light">#9B72FF</color>
+    <color name="primary_dark">#4527A0</color>
+    <color name="primary_deepest">#3A2380</color>
+
+    <!-- Success/Teal Tokens -->
+    <color name="teal">#00E5B0</color>
+    <color name="teal_glow">#7CFFDF</color>
+    <color name="teal_dark">#00B98D</color>
+
+    <!-- Rewards/Gold Tokens -->
+    <color name="gold">#FFD54F</color>
+    <color name="gold_light">#FFE082</color>
+    <color name="gold_dark">#F0A500</color>
+
+    <!-- UI Tokens -->
+    <color name="lavender_bg">#EDE7F6</color>
+    <color name="ink">#2A1E5C</color>
+    <color name="text_muted_dark">#B3A5F5</color>
+    <color name="text_muted_light">#8A80A8</color>
+    <color name="danger">#C62828</color>
+
+    <!-- Helpers -->
+    <color name="white_alpha_20">#33FFFFFF</color>
+    <color name="black_alpha_30">#4D000000</color>
+</resources>

@@ -25,6 +25,11 @@
         <activity
             android:name=".presentation.parents.ParentSecurityActivity"
             android:label="Segurança" />
+
+        <activity
+            android:name=".presentation.kids.NewMealActivity"
+            android:label="Missão da Refeição"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,44 +1,55 @@
-# Projeto de Aplicativo Android: GlicoKids (MVP)
+# GlicoKids: Gamified Diabetes Management (MVP Prototype)
 
-## 1. Descrição do Projeto
-O **GlicoKids** é um aplicativo Android voltado para o manejo gamificado do Diabetes Tipo 1 em crianças. O projeto atua como um assistente inteligente que facilita a contagem de carboidratos diária por meio da estimativa visual de pratos de comida. Além do cálculo de dosagem de insulina, o aplicativo possui um ecossistema de gamificação desenhado para incentivar a prática de atividades físicas, promovendo a saúde integral da criança e reduzindo o tempo de sedentarismo em frente às telas.
+## 1. Project Overview
+**GlicoKids** is a native Android application designed for the gamified management of Type 1 Diabetes in children. It serves as an intelligent assistant that simplifies daily carbohydrate counting through visual plate estimation. Beyond insulin dosage calculation, the app features a gamification ecosystem designed to encourage physical activity, promoting overall health and reducing sedentary screen time.
 
-## 2. Problema que o Aplicativo Pretende Resolver
-O manejo do Diabetes Tipo 1 na infância exige cálculos matemáticos constantes de carboidratos e dosagens de insulina a cada refeição. Erros nesse processo podem levar a quadros graves, como a hiperglicemia ou a hipoglicemia severa (que apresenta risco de coma). Além disso, o sedentarismo agrava a condição. O GlicoKids resolve a exaustão mental dos pais e a falta de engajamento das crianças, oferecendo um cálculo seguro (programado para estimativas conservadoras de carboidratos, mitigando riscos de superdosagem) e transformando a rotina de cuidados e exercícios em um jogo recompensador.
+## 2. Problem Statement
+Managing Type 1 Diabetes in childhood requires constant mathematical calculations for carbohydrates and insulin dosages at every meal. Errors in this process can lead to severe hypoglycemia or hyperglycemia. GlicoKids alleviates the mental burden on parents and boosts child engagement by offering safe calculations and transforming care routines into a rewarding RPG-style adventure.
 
-## 3. Plataforma Escolhida
-Este aplicativo será desenvolvido nativamente para o sistema operacional **Android**, utilizando a IDE Android Studio. A escolha por um desenvolvimento nativo garante melhor performance, fluidez nas animações de gamificação e acesso otimizado à câmera do dispositivo.
+## 3. Technology Stack
+- **Language**: Kotlin
+- **UI Framework**: XML with ViewBinding (Material 3)
+- **Architecture**: MVVM with Clean Architecture
+- **Dependency Injection**: Hilt
+- **Database**: Room (Local-first persistence)
+- **Navigation**: Navigation Component & Intents
 
-## 4. Interface do Usuário (UI) e Interface do Administrador (Pais)
-* **Interface da Criança (UI Principal):** Será lúdica, colorida e focada em recompensas. Contará com um botão central para a "Missão da Refeição" (tirar a foto do prato), um painel de conquistas (insígnias e créditos ganhos por atividades físicas) e desafios diários (ex: "Corra por 15 minutos para desbloquear um novo avatar").
-* **Interface dos Responsáveis (Painel Administrativo):** Uma área protegida por senha/PIN onde os pais configuram os parâmetros clínicos (Fator de Sensibilidade à Insulina, Relação Insulina/Carboidrato, Meta Glicêmica) e visualizam o histórico de alimentação e atividades da criança.
+## 4. User Experience (UX)
+*   **Child Interface (Primary UI)**: Playful, colorful, and reward-focused. Features a central "Meal Mission" (photo capture), achievement panels (badges and XP), and daily challenges.
+*   **Parent Interface (Admin Panel)**: Password/PIN protected area where clinical parameters (Sensitivity Factor, Carb Ratio, Target Glucose) are configured and history is reviewed.
 
-## 5. Principais Funcionalidades do Aplicativo
-1. **Módulo de Estimativa de Carboidratos:** Interface para captura de foto do prato de comida para estimativa da carga de carboidratos (com trava de segurança algorítmica para evitar superestimação).
-2. **Calculadora de Bolus de Insulina:** Motor de cálculo automático de UIs de insulina baseado nas regras e fatores clínicos predefinidos pelos responsáveis.
-3. **Módulo de Gamificação (Anti-Sedentarismo):** Sistema de missões físicas onde a criança ganha moedas virtuais e insígnias ao registrar e cumprir metas de exercícios, incentivando a saída do sofá.
-4. **Dashboard dos Pais:** Gerenciamento de perfis, configuração de variáveis clínicas e histórico de saúde.
+## 5. Design & UX Architecture
+The design follows Google's Material Design guidelines, focused on cognitive accessibility for children. 
 
-## 6. Design (Esboços e Wireframes)
-O design será construído seguindo as diretrizes do Material Design do Google, focado em acessibilidade cognitiva para crianças. Os wireframes iniciais contemplam: 
-- Tela de Abertura (Splash Screen com mascote).
-- Tela de Perfil/Dashboard da Criança.
-- Câmera embutida com guias visuais para o prato.
-- Tela de Configuração Clínica (exclusiva para pais).
+### Wireframe Flow
+![Project Wireframes](docs/prancha-fluxo.png)
 
-## 7. Desenvolvimento Acadêmico - Módulo 2
-### Requisitos Implementados:
-- **Navegação entre Activities**: Fluxo entre `MainActivity` e `ParentSecurityActivity` via `Intents`.
-- **Passagem de Dados**: Uso de `Extras` para passar o nome do usuário entre telas.
-- **Interação de Interface**: `AlertDialog` de segurança na abertura do app.
-- **Ciclo de Vida (Lifecycle)**:
-    - `onCreate()`: Inicialização da UI e binding.
-    - `onStart() / onResume()`: Logs de monitoramento de foco.
-    - `onPause() / onStop()`: Pausa de processos de sensor (simulado).
-    - `onDestroy()`: Limpeza de memória.
+*The interface transitions between a dark "Space Station" theme for children and a clean, sober theme for parents.*
 
-### Governança (Gitflow):
-- Branch `main`: Produção.
-- Branch `staging`: Homologação (BETA).
-- Branch `develop`: Desenvolvimento ativo.
-- CI/CD configurado via GitHub Actions para validação de testes.
+## 6. Technical Roadmap & Development History
+
+### Phase 1: Infrastructure & Navigation (Module 2)
+- **Core Architecture**: Establishment of Clean Architecture layers (Data, Domain, Presentation).
+- **Navigation Strategy**: Implementation of Activity-to-Activity flows via `Intents` and `Extras` for data passing.
+- **Security Baseline**: Mandatory `AlertDialog` for medical disclaimers on startup.
+- **Lifecycle Management**: Detailed logging and management of `onCreate`, `onStart`, `onResume`, `onPause`, `onStop`, and `onDestroy`.
+
+### Phase 2: Data Capture & Business Logic (Module 3)
+- **Structured UI**: Responsive layouts using `ScrollView` as root to ensure keyboard compatibility.
+- **Data Capture**: Specialized `EditText` components with specific `inputType` (Decimal/Numeric) for safe data entry.
+- **Resilient Calculation**: Implementation of the "Hero's Bolus" logic: `(carbs/15) + (glucose-100)/50`, rounded down for safety.
+- **Interactive States**: Use of `ViewBinding` for real-time validation and dynamic result display.
+- **Design System Integration**: Application of the "Space Station" design tokens (Colors, 3D Buttons, Glass Cards).
+
+## 7. Quality Assurance & DevOps
+- **Gitflow Strategy**: Professional branch structure (`main`, `staging`, `develop`).
+- **CI/CD Pipeline**: GitHub Actions configured for automated build validation and JUnit testing on every Pull Request.
+- **Branch Protection**: Strict rules and bypass lists implemented to ensure code integrity.
+
+## 8. Test Credentials (Prototype Only)
+To evaluate the prototype, use the following mocked credentials:
+- **Parent Area PIN**: `1234`
+- **Simulated Child Name**: `Lucas`
+
+---
+*This project is a technical prototype developed for academic purposes.*

@@ -1,0 +1,26 @@
+name: Enforce Git Flow
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Allow only staging or hotfix/* into main
+        run: |
+          HEAD="${{ github.head_ref }}"
+          echo "PR source branch: $HEAD -> main"
+          case "$HEAD" in
+            staging|hotfix/*)
+              echo "OK: '$HEAD' is allowed to merge into main."
+              ;;
+            *)
+              echo "::error::PRs to 'main' must come from 'staging' or 'hotfix/*'. Got: '$HEAD'"
+              exit 1
+              ;;
+          esac

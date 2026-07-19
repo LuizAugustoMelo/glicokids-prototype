@@ -1,0 +1,35 @@
+name: Sync development from staging
+
+on:
+  push:
+    branches: [staging]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-development-from-staging
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (histórico completo)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BACKPORT_TOKEN }}
+
+      - name: Fast-forward development -> staging
+        run: |
+          git config user.name "glicokids-sync"
+          git config user.email "sync@users.noreply.github.com"
+          git fetch origin staging develop
+          git checkout -B develop origin/develop
+          if git merge --ff-only origin/staging; then
+            git push origin develop
+            echo "develop fast-forwarded to staging ($(git rev-parse --short origin/staging))."
+          else
+            echo "::warning::develop divergiu de staging — fast-forward não foi possível. Sync manual necessário."
+          fi

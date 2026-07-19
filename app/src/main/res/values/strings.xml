@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GlicoKids Prototype</string>
+    <string name="welcome_kids">Bem-vindo à sua aventura, Pequeno Herói!</string>
+    <string name="parent_area">Área dos Pais</string>
+</resources>

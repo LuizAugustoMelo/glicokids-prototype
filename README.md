@@ -25,3 +25,20 @@ O design será construído seguindo as diretrizes do Material Design do Google, 
 - Tela de Perfil/Dashboard da Criança.
 - Câmera embutida com guias visuais para o prato.
 - Tela de Configuração Clínica (exclusiva para pais).
+
+## 7. Desenvolvimento Acadêmico - Módulo 2
+### Requisitos Implementados:
+- **Navegação entre Activities**: Fluxo entre `MainActivity` e `ParentSecurityActivity` via `Intents`.
+- **Passagem de Dados**: Uso de `Extras` para passar o nome do usuário entre telas.
+- **Interação de Interface**: `AlertDialog` de segurança na abertura do app.
+- **Ciclo de Vida (Lifecycle)**:
+    - `onCreate()`: Inicialização da UI e binding.
+    - `onStart() / onResume()`: Logs de monitoramento de foco.
+    - `onPause() / onStop()`: Pausa de processos de sensor (simulado).
+    - `onDestroy()`: Limpeza de memória.
+
+### Governança (Gitflow):
+- Branch `main`: Produção.
+- Branch `staging`: Homologação (BETA).
+- Branch `develop`: Desenvolvimento ativo.
+- CI/CD configurado via GitHub Actions para validação de testes.

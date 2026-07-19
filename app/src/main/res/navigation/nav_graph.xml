@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/kidsDashboardFragment">
+
+    <fragment
+        android:id="@+id/kidsDashboardFragment"
+        android:name="com.glicokids.prototype.presentation.kids.KidsDashboardFragment"
+        android:label="Kids Dashboard"
+        tools:layout="@layout/fragment_kids_dashboard">
+        <action
+            android:id="@+id/action_kidsDashboard_to_parentArea"
+            app:destination="@id/parentAreaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/parentAreaFragment"
+        android:name="com.glicokids.prototype.presentation.parents.ParentAreaFragment"
+        android:label="Parent Area"
+        tools:layout="@layout/fragment_parent_area" />
+</navigation>

@@ -1,0 +1,61 @@
+name: Auto back-merge main → staging
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: auto-backmerge-main-staging
+  cancel-in-progress: false
+
+jobs:
+  backport:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (histórico completo)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BACKPORT_TOKEN }}
+
+      - name: Configurar git
+        run: |
+          git config user.name "glicokids-backport"
+          git config user.email "backport@users.noreply.github.com"
+
+      - name: Construir branch de back-merge (staging + main)
+        id: build
+        run: |
+          git fetch origin staging main
+          git checkout -B backport/main-to-staging origin/staging
+          if ! git merge --no-edit origin/main; then
+            echo "::error::Conflito ao mesclar main em staging — back-merge precisa ser manual."
+            exit 1
+          fi
+          if [ "$(git rev-list --count origin/staging..HEAD)" -eq 0 ]; then
+            echo "staging já está em dia com main — nada a propagar."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git push --force-with-lease origin backport/main-to-staging
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      - name: Abrir PR de back-merge (se ainda não existir)
+        if: steps.build.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.BACKPORT_TOKEN }}
+        run: |
+          existing=$(gh pr list --base staging --head backport/main-to-staging --state open --json number --jq '.[0].number // empty')
+          if [ -z "$existing" ]; then
+            gh pr create \
+              --base staging \
+              --head backport/main-to-staging \
+              --title "chore: auto back-merge main → staging" \
+              --body $'## Back-merge automático (gitflow)\n\nPropaga para a `staging` o merge commit da release `staging→main`.\n\n_Gerado automaticamente para manter a paridade entre ambientes._'
+          else
+            echo "PR #$existing já aberto — atualizado pelo push."
+          fi

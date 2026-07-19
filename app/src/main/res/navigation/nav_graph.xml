@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_kidsDashboard_to_parentArea"
             app:destination="@id/parentAreaFragment" />
+        <action
+            android:id="@+id/action_kidsDashboard_to_newMeal"
+            app:destination="@id/newMealFragment" />
     </fragment>
 
     <fragment
@@ -20,4 +23,10 @@
         android:name="com.glicokids.prototype.presentation.parents.ParentAreaFragment"
         android:label="Parent Area"
         tools:layout="@layout/fragment_parent_area" />
+
+    <fragment
+        android:id="@+id/newMealFragment"
+        android:name="com.glicokids.prototype.presentation.kids.NewMealFragment"
+        android:label="New Meal Mission"
+        tools:layout="@layout/fragment_new_meal" />
 </navigation>

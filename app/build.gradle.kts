@@ -73,7 +73,7 @@ dependencies {
     // --- Testing ---
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.13.5")
-    testImplementation("com.google.common.truth:truth:1.1.4") // Fixed dependency name
+    testImplementation("com.google.truth:truth:1.4.5") // Corrected group ID and updated version
     testImplementation("com.google.dagger:hilt-android-testing:2.48")
     kaptTest("com.google.dagger:hilt-android-compiler:2.48")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

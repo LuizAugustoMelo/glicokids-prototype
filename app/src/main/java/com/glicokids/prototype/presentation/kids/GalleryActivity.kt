@@ -32,12 +32,12 @@ class GalleryActivity : AppCompatActivity() {
 
     private fun loadMedals() {
         medals = listOf(
-            Medal(1, "Primeira Missão", "Você completou sua primeira missão!", R.color.gold),
-            Medal(2, "Semana na Meta", "Sete dias seguidos no alvo!", R.color.teal),
-            Medal(3, "Corredor Cósmico", "Atividade física registrada hoje.", R.color.primary),
-            Medal(4, "10 Fotos de Prato", "Mestre da IA de alimentos.", R.color.gold),
-            Medal(5, "Maratonista", "Bloqueada: Complete 20 missões.", R.color.teal, true),
-            Medal(6, "Mês Perfeito", "Bloqueada: 30 dias no alvo.", R.color.primary, true)
+            Medal(1, "Primeira Missão", "Você completou sua primeira missão!", "OURO", R.drawable.ic_medal_gold),
+            Medal(2, "Semana na Meta", "Sete dias seguidos no alvo!", "ESMERALDA", R.drawable.ic_medal_teal),
+            Medal(3, "Corredor Cósmico", "Atividade física registrada hoje.", "DIAMANTE", R.drawable.ic_medal_purple),
+            Medal(4, "10 Fotos de Prato", "Mestre da IA de alimentos.", "OURO", R.drawable.ic_medal_gold),
+            Medal(5, "Maratonista", "Bloqueada: Complete 20 missões.", "ESMERALDA", R.drawable.ic_medal_teal, true),
+            Medal(6, "Mês Perfeito", "Bloqueada: 30 dias no alvo.", "DIAMANTE", R.drawable.ic_medal_purple, true)
         )
     }
 
@@ -46,7 +46,8 @@ class GalleryActivity : AppCompatActivity() {
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         val medal = medals[info.position]
         
-        menu?.setHeaderTitle(medal.name)
+        // Ajuste 2: Header com Nome e Raridade
+        menu?.setHeaderTitle("${medal.name} · ${medal.rarity}")
         menu?.add(0, 1, 0, "Ver Detalhes")
         menu?.add(0, 2, 1, "Compartilhar")
     }

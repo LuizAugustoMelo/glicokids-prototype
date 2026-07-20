@@ -25,14 +25,15 @@ class MedalAdapter(private val context: Context, private val medals: List<Medal>
         val tvName = view.findViewById<TextView>(R.id.tvMedalName)
 
         tvName.text = medal.name
-        ivIcon.setColorFilter(context.getColor(medal.colorRes))
-
+        
         if (medal.isLocked) {
             view.alpha = 0.45f
-            ivIcon.setImageResource(android.R.drawable.ic_lock_lock)
+            ivIcon.setImageResource(R.drawable.ic_medal_locked)
+            ivIcon.clearColorFilter()
         } else {
             view.alpha = 1.0f
-            ivIcon.setImageResource(android.R.drawable.btn_star_big_on)
+            ivIcon.setImageResource(medal.drawableRes)
+            ivIcon.clearColorFilter()
         }
 
         return view

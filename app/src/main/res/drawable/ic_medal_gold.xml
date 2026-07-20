@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <!-- Outer Circle -->
+    <path
+        android:fillColor="#FFD54F"
+        android:strokeColor="#F0A500"
+        android:strokeWidth="3"
+        android:pathData="M50,50m-45,0a45,45 0,1 1,90 0a45,45 0,1 1,-90 0" />
+    <!-- Star Icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,25l7.73,15.66l17.27,2.51l-12.5,12.18l2.95,17.2l-15.45,-8.12l-15.45,8.12l2.95,-17.2l-12.5,-12.18l17.27,-2.51z" />
+</vector>

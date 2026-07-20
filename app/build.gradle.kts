@@ -53,6 +53,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
 
+    // --- Security ---
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
     // --- Room ---
     val roomVersion = "2.5.2"
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -73,9 +76,14 @@ dependencies {
     // --- Testing ---
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.13.5")
-    testImplementation("com.google.truth:truth:1.4.5") // Corrected group ID and updated version
-    testImplementation("com.google.dagger:hilt-android-testing:2.48")
-    kaptTest("com.google.dagger:hilt-android-compiler:2.48")
+    testImplementation("com.google.truth:truth:1.4.5")
+    testImplementation("org.robolectric:robolectric:4.10.3")
+    testImplementation("androidx.test:core-ktx:1.5.0")
+    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("com.google.dagger:hilt-android-testing:2.48.1")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.48.1")
+    
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

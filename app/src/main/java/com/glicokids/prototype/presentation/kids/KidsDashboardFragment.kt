@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.glicokids.prototype.databinding.FragmentKidsDashboardBinding
+import com.glicokids.prototype.presentation.parents.ParentSecurityActivity
+import com.glicokids.prototype.util.UIHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +29,8 @@ class KidsDashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupToolbar()
+
         binding.btnParentArea.setOnClickListener {
             // Requisito Módulo 2: Navegação via Intent com Passagem de Dados (Extras)
             val intent = Intent(requireContext(), com.glicokids.prototype.presentation.parents.ParentSecurityActivity::class.java).apply {
@@ -41,6 +45,26 @@ class KidsDashboardFragment : Fragment() {
                 putExtra("CHILD_NAME", "Lucas")
             }
             startActivity(intent)
+        }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                com.glicokids.prototype.R.id.menu_gallery -> {
+                    UIHelper.navigateTo(requireContext(), GalleryActivity::class.java)
+                    true
+                }
+                com.glicokids.prototype.R.id.menu_avatar -> {
+                    UIHelper.navigateTo(requireContext(), AvatarActivity::class.java)
+                    true
+                }
+                com.glicokids.prototype.R.id.menu_help -> {
+                    UIHelper.navigateTo(requireContext(), HelpActivity::class.java)
+                    true
+                }
+                else -> false
+            }
         }
     }
 

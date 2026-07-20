@@ -3,6 +3,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".GlicoKidsApplication"
@@ -29,6 +30,21 @@
         <activity
             android:name=".presentation.kids.NewMealActivity"
             android:label="Missão da Refeição"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.kids.GalleryActivity"
+            android:label="Minhas Medalhas"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.kids.AvatarActivity"
+            android:label="Mudar Avatar"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".presentation.kids.HelpActivity"
+            android:label="Central de Ajuda"
             android:screenOrientation="portrait" />
     </application>
 

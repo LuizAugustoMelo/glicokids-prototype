@@ -10,7 +10,7 @@ import javax.inject.Inject
 class CalculateBolusUseCase @Inject constructor() {
 
     fun execute(
-        carbs: Int,
+        carbs: Double,
         currentGlucose: Int,
         targetGlucose: Int,
         sensitivityFactor: Int,
@@ -29,11 +29,11 @@ class CalculateBolusUseCase @Inject constructor() {
             }
 
             // Happy Path
-            if (carbs == 0 && currentGlucose <= targetGlucose) {
+            if (carbs == 0.0 && currentGlucose <= targetGlucose) {
                 return Result.Success(BolusResult(0.0, "Nenhuma dose necessária."))
             }
 
-            val foodBolus = carbs.toDouble() / carbRatio
+            val foodBolus = carbs / carbRatio
             val correctionBolus = if (currentGlucose > targetGlucose) {
                 (currentGlucose - targetGlucose).toDouble() / sensitivityFactor
             } else {

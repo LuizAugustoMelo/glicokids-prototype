@@ -1,46 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- b10 · Trava PIN da Área dos Pais. Teclado próprio (alvos grandes), nunca teclado do sistema. -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="24dp">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/lavender_bg">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp" android:layout_height="40dp"
+        android:layout_marginStart="16dp" android:layout_marginTop="16dp"
+        android:background="@drawable/bg_circle_white" android:src="@drawable/ic_back_ink"
+        android:contentDescription="Voltar"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Validação de Segurança"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="🔒 Área dos Pais"
+        android:textColor="@color/ink" android:textSize="22sp" android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tvChildName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Olá, Pai/Mãe!"
-        android:textSize="18sp"
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Digite o PIN para continuar"
+        android:textColor="@color/text_muted_light" android:textSize="13sp" android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 
-    <EditText
-        android:id="@+id/etPin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Digite o PIN de Segurança"
-        android:inputType="numberPassword"
-        app:layout_constraintTop_toBottomOf="@id/tvChildName" />
+    <LinearLayout
+        android:id="@+id/llPinDots"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="28dp" android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+        <View android:id="@+id/dot1" android:layout_width="18dp" android:layout_height="18dp" android:layout_margin="8dp" android:background="@drawable/bg_pin_dot_empty"/>
+        <View android:id="@+id/dot2" android:layout_width="18dp" android:layout_height="18dp" android:layout_margin="8dp" android:background="@drawable/bg_pin_dot_empty"/>
+        <View android:id="@+id/dot3" android:layout_width="18dp" android:layout_height="18dp" android:layout_margin="8dp" android:background="@drawable/bg_pin_dot_empty"/>
+        <View android:id="@+id/dot4" android:layout_width="18dp" android:layout_height="18dp" android:layout_margin="8dp" android:background="@drawable/bg_pin_dot_empty"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnVerify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Verificar PIN"
-        app:layout_constraintTop_toBottomOf="@id/etPin" />
+    <GridLayout
+        android:id="@+id/glKeypad"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp" android:layout_marginTop="28dp"
+        android:columnCount="3"
+        app:layout_constraintTop_toBottomOf="@id/llPinDots">
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="1"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey1"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="2"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey2"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="3"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey3"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="4"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey4"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="5"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey5"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="6"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey6"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="7"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey7"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="8"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey8"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="9"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null" android:id="@+id/btnKey9"/>
+        <Space android:layout_width="0dp" android:layout_columnWeight="1"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnKey0" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="0"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnKeyDel" android:layout_width="0dp" android:layout_height="72dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="⌫"
+            android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_muted_light"
+            android:background="@drawable/bg_glass_card" app:backgroundTint="@null"/>
+    </GridLayout>
 
+    <TextView
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="área exclusiva para adultos responsáveis"
+        android:textColor="@color/text_muted_light" android:textSize="11sp" android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

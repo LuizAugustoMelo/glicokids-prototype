@@ -31,7 +31,7 @@ class SecurityViewModelTest {
         viewModel.validatePin("0000")
         
         assertThat(viewModel.accessGranted.value).isFalse()
-        assertThat(viewModel.errorMessage.value).isEqualTo("PIN Incorreto. Tente novamente.")
+        assertThat(viewModel.errorMessage.value).isEqualTo("PIN Incorreto. 2 tentativas restantes.")
     }
 
     @Test

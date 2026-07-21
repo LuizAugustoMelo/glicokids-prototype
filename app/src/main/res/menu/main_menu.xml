@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- b8 · Menu de opções global. Ícones da marca (já existem no repo) — nunca android.R.drawable. -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menu_gallery"
-        android:title="Galeria de Medalhas"
-        android:icon="@android:drawable/btn_star_big_on"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_avatar"
-        android:title="Mudar Avatar"
-        android:icon="@android:drawable/ic_menu_edit"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/menu_help"
-        android:title="Central de Ajuda"
-        android:icon="@android:drawable/ic_menu_help"
-        app:showAsAction="never" />
+    <item android:id="@+id/menu_gallery" android:title="Galeria de Medalhas"
+        android:icon="@drawable/ic_menu_medal" app:showAsAction="never"/>
+    <item android:id="@+id/menu_avatar" android:title="Mudar Avatar"
+        android:icon="@drawable/ic_menu_avatar" app:showAsAction="never"/>
+    <item android:id="@+id/menu_help" android:title="Central de Ajuda"
+        android:icon="@drawable/ic_menu_help" app:showAsAction="never"/>
 </menu>

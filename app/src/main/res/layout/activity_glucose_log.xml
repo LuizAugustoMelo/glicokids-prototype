@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- b16 · Registro de Glicemia: toggle Digitar/Sensor, valor grande colorido por glucoseStatus(), teclado próprio. -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/lavender_bg">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp" android:layout_height="40dp"
+        android:layout_marginStart="16dp" android:layout_marginTop="16dp"
+        android:background="@drawable/bg_circle_white" android:src="@drawable/ic_back_ink"
+        android:contentDescription="Voltar"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Glicemia" android:textColor="@color/ink" android:textSize="21sp" android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack" app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/btnBack"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/tgInputMode"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:singleSelection="true" app:selectionRequired="true"
+        app:checkedButton="@+id/btnModeManual"
+        app:layout_constraintTop_toTopOf="@id/btnBack" app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent">
+        <Button style="@style/Widget.Material3.Button.OutlinedButton" android:id="@+id/btnModeManual"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Digitar" android:textAllCaps="false" android:textSize="12sp"/>
+        <Button style="@style/Widget.Material3.Button.OutlinedButton" android:id="@+id/btnModeSensor"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Sensor" android:textAllCaps="false" android:textSize="12sp"/>
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvSensorBanner"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp" android:layout_marginTop="16dp"
+        app:cardCornerRadius="20dp" app:cardElevation="0dp"
+        app:cardBackgroundColor="#DFF7EE" app:strokeWidth="2dp" app:strokeColor="@color/teal_dark"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
+        <TextView
+            android:id="@+id/tvSensorStatus"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="● Sensor conectado (simulado): 112 mg/dL → estável"
+            android:textColor="#00785B" android:textSize="12sp" android:textStyle="bold"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tvGlucoseValue"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="112" android:textColor="@color/primary_dark" android:textSize="64sp" android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/cvSensorBanner"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvUnit"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="mg/dL" android:textColor="@color/text_muted_light" android:textSize="14sp" android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvGlucoseValue"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvStatusChip"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_chip_teal_soft"
+        android:paddingHorizontal="16dp" android:paddingVertical="6dp"
+        android:text="Na meta! Glico adorou 🎯"
+        android:textColor="#00785B" android:textSize="13sp" android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvUnit"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Registrar vale +5 XP · o histórico completo fica na Área dos Pais"
+        android:textColor="@color/text_muted_light" android:textSize="11sp" android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
+    <GridLayout
+        android:id="@+id/glKeypad"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp" android:layout_marginBottom="12dp"
+        android:columnCount="3"
+        app:layout_constraintBottom_toTopOf="@id/tvHint">
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey1" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="1"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey2" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="2"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey3" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="3"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey4" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="4"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey5" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="5"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey6" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="6"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey7" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="7"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey8" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="8"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey9" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="9"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKeyDel" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="⌫"
+            android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_muted_light"
+            android:background="@drawable/bg_glass_card" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKey0" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="0"
+            android:textSize="22sp" android:textStyle="bold" android:textColor="@color/ink"
+            android:background="@drawable/bg_button_white_3d" app:backgroundTint="@null"/>
+        <Button android:insetTop="0dp" android:insetBottom="0dp" android:id="@+id/btnGKeyOk" android:layout_width="0dp" android:layout_height="64dp"
+            android:layout_columnWeight="1" android:layout_margin="5dp" android:text="OK"
+            android:textSize="18sp" android:textStyle="bold" android:textColor="@android:color/white"
+            android:background="@drawable/bg_button_primary_3d" app:backgroundTint="@null"/>
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

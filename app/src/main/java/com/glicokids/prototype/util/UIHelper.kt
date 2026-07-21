@@ -19,7 +19,7 @@ object UIHelper {
         context.startActivity(intent)
     }
 
-    fun getGlucoseStatus(value: Int, min: Int, max: Int): GlucoseStatus {
+    fun glucoseStatus(value: Int, min: Int, max: Int): GlucoseStatus {
         return when {
             value < min || value > max -> GlucoseStatus.FORA_DA_META
             value in min..(min + 15) || value in (max - 15)..max -> GlucoseStatus.ATENCAO

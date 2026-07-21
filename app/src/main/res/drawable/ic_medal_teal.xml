@@ -8,7 +8,6 @@
         android:strokeColor="#00B98D"
         android:strokeWidth="3"
         android:pathData="M50,50m-45,0a45,45 0,1 1,90 0a45,45 0,1 1,-90 0" />
-    <!-- Bolt/Lightning Icon -->
     <path
         android:fillColor="#FFFFFF"
         android:pathData="M45,25l15,0l-10,25l10,0l-20,30l5,-30l-10,0z" />

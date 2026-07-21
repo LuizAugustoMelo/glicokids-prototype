@@ -8,7 +8,6 @@
         android:strokeColor="#4527A0"
         android:strokeWidth="3"
         android:pathData="M50,50m-45,0a45,45 0,1 1,90 0a45,45 0,1 1,-90 0" />
-    <!-- Diamond Icon -->
     <path
         android:fillColor="#FFFFFF"
         android:pathData="M50,25l25,25l-25,25l-25,-25z" />

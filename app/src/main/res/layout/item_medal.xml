@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- b12/b13 · Célula da GridView. Adapter define ivMedalIcon (ic_medal_gold/teal/purple/locked) e alpha 0.45 se bloqueada. -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
     android:layout_margin="6dp"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="2dp"
+    app:cardCornerRadius="18dp" app:cardElevation="2dp"
     app:cardBackgroundColor="@android:color/white">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp"
-        android:gravity="center">
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="12dp" android:gravity="center">
 
         <ImageView
             android:id="@+id/ivMedalIcon"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="52dp" android:layout_height="52dp"
             android:scaleType="centerInside"
-            android:src="@android:drawable/btn_star_big_on" />
+            tools:src="@drawable/ic_medal_gold"
+            android:contentDescription="Medalha"/>
 
         <TextView
             android:id="@+id/tvMedalName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Medal Name"
             android:textAlignment="center"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:textColor="@color/ink" />
-
+            android:textColor="@color/ink" android:textSize="11sp" android:textStyle="bold"
+            tools:text="Primeira Missão"/>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

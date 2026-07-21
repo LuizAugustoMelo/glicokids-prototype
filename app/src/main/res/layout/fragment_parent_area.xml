@@ -1,50 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- b17 · Área dos Pais (visual sóbrio). Linhas SÓ LEITURA: toque abre o diálogo (dialog_target_range.xml e equivalentes). -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:background="#F5F3FA">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Configurações dos Pais (Protegido)"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/lblTargetRange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Faixa alvo (na meta)"
-        android:textColor="@color/ink"
-        android:textSize="16sp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp" android:layout_height="40dp"
+            android:background="@drawable/bg_circle_white" android:src="@drawable/ic_back_ink"
+            android:contentDescription="Voltar"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipTargetRange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="70 - 180 mg/dL"
-        app:chipBackgroundColor="@color/teal"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/lblTargetRange"
-        app:layout_constraintBottom_toBottomOf="@id/lblTargetRange" />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Área dos Pais" android:textColor="@color/ink" android:textSize="19sp" android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/btnBack" app:layout_constraintStart_toEndOf="@id/btnBack"/>
 
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Aqui os pais configurarão o Fator de Sensibilidade e Relação Insulina/Carbo."
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/lblTargetRange"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="protegida por PIN · perfil de Lucas"
+            android:textColor="@color/text_muted_light" android:textSize="10.5sp" android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" app:layout_constraintStart_toEndOf="@id/btnBack"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Parâmetros clínicos -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvParams"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="18dp" app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeWidth="1dp" app:strokeColor="#E3DAF7"
+            app:layout_constraintTop_toBottomOf="@id/btnBack">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:paddingHorizontal="16dp" android:paddingVertical="6dp"
+                android:divider="?android:attr/dividerHorizontal" android:showDividers="middle">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingVertical="8dp"
+                    android:text="PARÂMETROS CLÍNICOS" android:textColor="@color/text_muted_light" android:textSize="12sp" android:textStyle="bold" android:letterSpacing="0.05"/>
+            <LinearLayout android:id="@+id/rowFsi" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="12dp"
+                android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                    android:text="Fator de Sensibilidade (FSI)" android:textColor="@color/ink" android:textSize="13sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/rowFsiValue" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_purple_soft" android:paddingHorizontal="14dp" android:paddingVertical="6dp"
+                    android:text="1:50 ›" android:textColor="@color/primary_dark" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/rowRatio" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="12dp"
+                android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                    android:text="Relação Insulina/Carbo" android:textColor="@color/ink" android:textSize="13sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/rowRatioValue" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_purple_soft" android:paddingHorizontal="14dp" android:paddingVertical="6dp"
+                    android:text="1:15 ›" android:textColor="@color/primary_dark" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/rowTarget" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="12dp"
+                android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                    android:text="Alvo Glicêmico" android:textColor="@color/ink" android:textSize="13sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/rowTargetValue" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_purple_soft" android:paddingHorizontal="14dp" android:paddingVertical="6dp"
+                    android:text="100 mg/dL ›" android:textColor="@color/primary_dark" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/rowRange" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="12dp"
+                android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                    android:text="Faixa alvo (na meta)" android:textColor="@color/ink" android:textSize="13sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/rowRangeValue" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_teal_soft" android:paddingHorizontal="14dp" android:paddingVertical="6dp"
+                    android:text="70–180 ›" android:textColor="#00785B" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/rowMaxDose" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:paddingVertical="12dp"
+                android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+                <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                    android:text="Trava de dose máxima" android:textColor="@color/ink" android:textSize="13sp" android:textStyle="bold"/>
+                <TextView android:id="@+id/rowMaxDoseValue" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip_danger_soft" android:paddingHorizontal="14dp" android:paddingVertical="6dp"
+                    android:text="6 UI ›" android:textColor="@color/danger" android:textSize="14sp" android:textStyle="bold"/>
+            </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvEditHint"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="toque em uma linha para editar — nada é editado direto na lista"
+            android:textColor="@color/text_muted_light" android:textSize="11sp" android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/cvParams"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Gráfico 7 dias -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvChart"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardCornerRadius="18dp" app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeWidth="1dp" app:strokeColor="#E3DAF7"
+            app:layout_constraintTop_toBottomOf="@id/tvEditHint">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="16dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                        android:text="GLICEMIA · ÚLTIMOS 7 DIAS" android:textColor="@color/text_muted_light" android:textSize="12sp" android:textStyle="bold" android:letterSpacing="0.05"/>
+                    <TextView android:id="@+id/tvTimeInRange" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="82% na meta" android:textColor="#00785B" android:textSize="10.5sp" android:textStyle="bold"/>
+                </LinearLayout>
+                <!-- Barras: LinearLayout llWeekChart preenchido no código (peso por dia, cor por glucoseStatus) -->
+                <LinearLayout android:id="@+id/llWeekChart" android:layout_width="match_parent" android:layout_height="70dp"
+                    android:layout_marginTop="12dp" android:orientation="horizontal" android:gravity="bottom"/>
+                <LinearLayout android:id="@+id/llWeekLabels" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" android:orientation="horizontal"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Últimas refeições -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvMeals"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardCornerRadius="18dp" app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:strokeWidth="1dp" app:strokeColor="#E3DAF7"
+            app:layout_constraintTop_toBottomOf="@id/cvChart">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:paddingHorizontal="16dp" android:paddingVertical="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingVertical="8dp"
+                    android:text="ÚLTIMAS REFEIÇÕES" android:textColor="@color/text_muted_light" android:textSize="12sp" android:textStyle="bold" android:letterSpacing="0.05"/>
+                <!-- RecyclerView rvMeals: item = "Hoje 12:20 · Almoço | 45g · 3,5 UI" (Room) -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMeals"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/btnEditParams"
+            android:layout_width="match_parent" android:layout_height="56dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_button_primary_3d" app:backgroundTint="@null"
+            android:text="Editar parâmetros" android:textAllCaps="false"
+            android:textColor="@android:color/white" android:textSize="14sp" android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/cvMeals"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

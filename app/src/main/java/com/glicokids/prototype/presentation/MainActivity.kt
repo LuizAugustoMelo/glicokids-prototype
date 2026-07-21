@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Security Hardening: Prevent screenshots and screen recording
+        /* Security Hardening: Prevent screenshots and screen recording
         window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
-        )
+        ) */
 
         Log.d(TAG, "onCreate: Activity Criada")
         binding = ActivityMainBinding.inflate(layoutInflater)

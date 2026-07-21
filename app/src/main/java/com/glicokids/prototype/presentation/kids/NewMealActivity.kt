@@ -7,8 +7,10 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.glicokids.prototype.databinding.ActivityNewMealBinding
+import com.glicokids.prototype.util.UIHelper
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewMealActivity : AppCompatActivity() {
@@ -16,6 +18,9 @@ class NewMealActivity : AppCompatActivity() {
     private val TAG = "GlicoKids_Lifecycle"
     private lateinit var binding: ActivityNewMealBinding
     private val viewModel: NewMealViewModel by viewModels()
+
+    @Inject
+    lateinit var storageRepository: com.glicokids.prototype.domain.repository.StorageRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +61,14 @@ class NewMealActivity : AppCompatActivity() {
             if (state.insulinDose != null) {
                 binding.llResult.visibility = View.VISIBLE
                 binding.tvCalculationResult.text = String.format(Locale.getDefault(), "Dose sugerida: %.1f UI", state.insulinDose)
+                
+                // Ajuste 4: Centralized color based on range
+                val min = storageRepository.getInt("range_min", 70)
+                val max = storageRepository.getInt("range_max", 180)
+                val glucoseValue = binding.etCurrentGlucose.text.toString().toIntOrNull() ?: 100
+                
+                val status = UIHelper.getGlucoseStatus(glucoseValue, min, max)
+                binding.tvCalculationResult.setTextColor(UIHelper.getStatusColor(status))
             } else {
                 binding.llResult.visibility = View.GONE
             }

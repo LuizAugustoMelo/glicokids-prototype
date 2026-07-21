@@ -10,12 +10,16 @@ import com.glicokids.prototype.databinding.FragmentKidsDashboardBinding
 import com.glicokids.prototype.presentation.parents.ParentSecurityActivity
 import com.glicokids.prototype.util.UIHelper
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class KidsDashboardFragment : Fragment() {
 
     private var _binding: FragmentKidsDashboardBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var storageRepository: com.glicokids.prototype.domain.repository.StorageRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +34,7 @@ class KidsDashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar()
+        updateGlucoseDisplay()
 
         binding.btnParentArea.setOnClickListener {
             // Requisito Módulo 2: Navegação via Intent com Passagem de Dados (Extras)
@@ -65,6 +70,22 @@ class KidsDashboardFragment : Fragment() {
                 }
                 else -> false
             }
+        }
+    }
+
+    private fun updateGlucoseDisplay() {
+        val currentGlucose = 112 // Mocked for Dashboard
+        val min = storageRepository.getInt("range_min", 70)
+        val max = storageRepository.getInt("range_max", 180)
+
+        val status = UIHelper.getGlucoseStatus(currentGlucose, min, max)
+        val color = UIHelper.getStatusColor(status)
+
+        binding.cardGlucose.setCardBackgroundColor(color)
+        binding.tvGlucoseStatus.text = when (status) {
+            UIHelper.GlucoseStatus.NA_META -> "mg/dL · Na meta!"
+            UIHelper.GlucoseStatus.ATENCAO -> "mg/dL · Atenção"
+            UIHelper.GlucoseStatus.FORA_DA_META -> "mg/dL · Fora da meta"
         }
     }
 

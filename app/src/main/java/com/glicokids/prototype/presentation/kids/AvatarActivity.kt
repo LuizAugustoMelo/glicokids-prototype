@@ -3,6 +3,7 @@ package com.glicokids.prototype.presentation.kids
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ViewSwitcher
 import androidx.activity.viewModels
@@ -69,14 +70,27 @@ class AvatarActivity : AppCompatActivity(), ViewSwitcher.ViewFactory {
         viewModel.currentIndex.observe(this) { index ->
             binding.isAvatar.setImageResource(avatars[index])
             binding.tvAvatarName.text = avatarNames[index]
+            binding.tvAvatarStatus.text = "roupa ${index + 1} de 5 · desbloqueada"
+            updateDots(index)
+        }
+    }
+
+    private fun updateDots(currentIndex: Int) {
+        for (i in 0 until binding.llDots.childCount) {
+            val dot = binding.llDots.getChildAt(i)
+            if (i == currentIndex) {
+                dot.setBackgroundResource(R.drawable.bg_circle_teal)
+            } else {
+                dot.setBackgroundColor(android.graphics.Color.parseColor("#D9CFF3"))
+            }
         }
     }
 
     override fun makeView(): View {
         val imageView = ImageView(this)
-        imageView.layoutParams = ViewSwitcher.LayoutParams(
-            ViewSwitcher.LayoutParams.MATCH_PARENT,
-            ViewSwitcher.LayoutParams.MATCH_PARENT
+        imageView.layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
         )
         imageView.scaleType = ImageView.ScaleType.FIT_CENTER
         return imageView

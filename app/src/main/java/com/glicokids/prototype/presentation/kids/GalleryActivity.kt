@@ -24,6 +24,10 @@ class GalleryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnBack.setOnClickListener { finish() }
+        binding.btnShare.setOnClickListener { shareStreak() }
+
+        // Mock streak data
+        binding.tvStreakCount.text = "5"
 
         loadMedals()
         binding.gvMedals.adapter = MedalAdapter(this, medals)
@@ -73,6 +77,16 @@ class GalleryActivity : AppCompatActivity() {
         val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "Ganhei a medalha ${medal.name} no GlicoKids! 🚀")
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
+
+    private fun shareStreak() {
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "Estou há 5 dias na meta no GlicoKids! 🚀 Recorde de 9 dias.")
             type = "text/plain"
         }
         val shareIntent = Intent.createChooser(sendIntent, null)

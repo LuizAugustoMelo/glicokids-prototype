@@ -86,6 +86,7 @@ dependencies {
     
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("com.google.truth:truth:1.4.5")
 }
 
 // Allow references to generated code

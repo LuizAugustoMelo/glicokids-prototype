@@ -26,6 +26,11 @@ jobs:
     - name: Run Unit Tests (Happy and Fail Paths)
       run: ./gradlew test
 
+    - name: Verify Test Coverage
+      run: |
+        echo "Verificando se todos os testes passaram..."
+        ./gradlew testDebugUnitTest
+
   build:
     name: Build Debug APK
     runs-on: ubuntu-latest

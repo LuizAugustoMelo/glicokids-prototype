@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.glicokids.prototype.domain.repository.StorageRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class EncryptedStorage @Inject constructor(context: Context) : StorageRepository {
+class EncryptedStorage @Inject constructor(
+    @ApplicationContext context: Context
+) : StorageRepository {
 
     private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 

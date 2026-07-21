@@ -6,7 +6,6 @@
     <path
         android:fillColor="#D9CFF3"
         android:pathData="M50,50m-45,0a45,45 0,1 1,90 0a45,45 0,1 1,-90 0" />
-    <!-- Lock Icon -->
     <path
         android:fillColor="#FFFFFF"
         android:pathData="M50,30c-5.5,0-10,4.5-10,10v5h-2v25h24v-25h-2v-5c0,-5.5-4.5,-10-10,-10zM50,35c2.8,0 5,2.2 5,5v5h-10v-5c0,-2.8 2.2,-5 5,-5z" />

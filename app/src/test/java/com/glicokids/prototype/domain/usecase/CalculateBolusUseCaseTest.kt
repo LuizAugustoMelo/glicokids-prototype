@@ -11,7 +11,7 @@ class CalculateBolusUseCaseTest {
     @Test
     fun `quando houver carboidratos, deve calcular dose de alimento corretamente`() {
         val result = useCase.execute(
-            carbs = 40,
+            carbs = 40.0,
             currentGlucose = 100,
             targetGlucose = 100,
             sensitivityFactor = 50,
@@ -26,7 +26,7 @@ class CalculateBolusUseCaseTest {
     @Test
     fun `FAIL PATH - quando fator de sensibilidade for zero, deve retornar falha`() {
         val result = useCase.execute(
-            carbs = 40,
+            carbs = 40.0,
             currentGlucose = 150,
             targetGlucose = 100,
             sensitivityFactor = 0, // Erro aqui
@@ -41,7 +41,7 @@ class CalculateBolusUseCaseTest {
     @Test
     fun `FAIL PATH - quando carboidratos forem negativos, deve retornar falha`() {
         val result = useCase.execute(
-            carbs = -10,
+            carbs = -10.0,
             currentGlucose = 100,
             targetGlucose = 100,
             sensitivityFactor = 50,

@@ -41,6 +41,22 @@ The design follows Google's Material Design guidelines, focused on cognitive acc
 - **Interactive States**: Use of `ViewBinding` for real-time validation and dynamic result display.
 - **Design System Integration**: Application of the "Space Station" design tokens (Colors, 3D Buttons, Glass Cards).
 
+### Phase 3: Advanced UI & Interaction (Module 4)
+- **Dynamic Gallery**: Implementation of a `GridView` with a `BaseAdapter` to display earned medals.
+- **Contextual Actions**: Usage of **Context Menus** (Long-press) on gallery items for "View Details" and "Share" features.
+- **Image Switching**: Implementation of an `ImageSwitcher` with factory and animations for avatar selection.
+- **External Integration**: Usage of a themed **WebView** with JavaScript enabled to display official health guidelines.
+- **Global Navigation**: Implementation of an **Options Menu** (Toolbar) for quick access to app sections.
+- **Helper Pattern**: Centralization of common UI logic in a `UIHelper` utility class.
+- **Persistence**: Usage of `SharedPreferences` to save and restore user avatar preferences.
+- **Enhanced Identity**: Custom vector medals and rarity classification system.
+- **Configurable Health Logic**: User-defined glucose targets with validation and persistent encryption.
+
+### Phase 4 (Planned)
+- **Onboarding Flow**: Responsible party registration (LGPD compliant).
+- **Hero Profile**: Child's profile customization and initial clinical setup.
+- **Secure Authentication**: Google Login integration and PIN creation/recovery system.
+
 ## 7. Quality Assurance & DevOps
 - **Gitflow Strategy**: Professional branch structure (`main`, `staging`, `develop`).
 - **CI/CD Pipeline**: GitHub Actions configured for automated build validation and JUnit testing on every Pull Request.

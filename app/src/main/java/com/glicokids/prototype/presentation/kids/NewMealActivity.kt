@@ -4,16 +4,23 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.glicokids.prototype.databinding.ActivityNewMealBinding
+import com.glicokids.prototype.util.UIHelper
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewMealActivity : AppCompatActivity() {
 
     private val TAG = "GlicoKids_Lifecycle"
     private lateinit var binding: ActivityNewMealBinding
+    private val viewModel: NewMealViewModel by viewModels()
+
+    @Inject
+    lateinit var storageRepository: com.glicokids.prototype.domain.repository.StorageRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,59 +32,53 @@ class NewMealActivity : AppCompatActivity() {
         Log.d(TAG, "NewMealActivity - Iniciando missão para: $childName")
 
         setupListeners()
+        observeViewModel()
     }
 
     private fun setupListeners() {
         binding.btnBack.setOnClickListener { finish() }
 
         binding.btnTakePhoto.setOnClickListener {
-            // Requisito: A foto/IA é simulada no protótipo
             Toast.makeText(this, "Simulando captura de foto...", Toast.LENGTH_SHORT).show()
-            binding.etCarbohydrates.setText("45") // Simulando valor detectado pela "IA"
+            binding.etCarbohydrates.setText("45") 
         }
 
         binding.btnCalculateBolus.setOnClickListener {
-            calculateBolus()
+            viewModel.calculate(
+                binding.etCarbohydrates.text.toString(),
+                binding.etCurrentGlucose.text.toString()
+            )
         }
     }
 
-    private fun calculateBolus() {
-        val carbsText = binding.etCarbohydrates.text.toString()
-        val glucoseText = binding.etCurrentGlucose.text.toString()
+    private fun observeViewModel() {
+        viewModel.uiState.observe(this) { state ->
+            // Update errors
+            binding.etCarbohydrates.error = state.carbsError
+            binding.etCurrentGlucose.error = state.glucoseError
 
-        // Validação obrigatória do Módulo 3
-        if (carbsText.isBlank()) {
-            binding.etCarbohydrates.error = "Campo obrigatório"
-            return
-        }
-        if (glucoseText.isBlank()) {
-            binding.etCurrentGlucose.error = "Campo obrigatório"
-            return
-        }
+            // Update Result
+            if (state.insulinDose != null) {
+                binding.llResult.visibility = View.VISIBLE
+                binding.tvCalculationResult.text = String.format(Locale.getDefault(), "Dose sugerida: %.1f UI", state.insulinDose)
+                
+                // Ajuste 4: Centralized color based on range
+                val min = storageRepository.getInt("range_min", 70)
+                val max = storageRepository.getInt("range_max", 180)
+                val glucoseValue = binding.etCurrentGlucose.text.toString().toIntOrNull() ?: 100
+                
+                val status = UIHelper.getGlucoseStatus(glucoseValue, min, max)
+                binding.tvCalculationResult.setTextColor(UIHelper.getStatusColor(status))
+            } else {
+                binding.llResult.visibility = View.GONE
+            }
 
-        try {
-            val carbs = carbsText.toDouble()
-            val glucose = glucoseText.toInt()
-
-            // Fórmula do Módulo 3: dose = (carbo / 15.0) + ((glicemia - 100) / 50.0)
-            val foodBolus = carbs / 15.0
-            val correctionBolus = if (glucose > 100) (glucose - 100) / 50.0 else 0.0
-            
-            val totalDose = foodBolus + correctionBolus
-            
-            // Regra: Arredondada PARA BAIXO em passos de 0,5 (estimativa conservadora)
-            val roundedDose = (Math.floor(totalDose * 2.0) / 2.0)
-            val finalDose = if (roundedDose < 0) 0.0 else roundedDose
-
-            // Exibir resultado
-            binding.llResult.visibility = View.VISIBLE
-            binding.tvCalculationResult.text = String.format(Locale.getDefault(), "Dose sugerida: %.1f UI", finalDose)
-            
-            Log.d(TAG, "Cálculo realizado: Carbos=$carbs, Glicemia=$glucose -> Dose=$finalDose")
-
-        } catch (e: Exception) {
-            Log.e(TAG, "Erro na conversão de valores: ${e.message}")
-            Toast.makeText(this, "Por favor, insira valores válidos", Toast.LENGTH_SHORT).show()
+            // Show system messages
+            state.message?.let {
+                if (state.insulinDose == null) {
+                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 

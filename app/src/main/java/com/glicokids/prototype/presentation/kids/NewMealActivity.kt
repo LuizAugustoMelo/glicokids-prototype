@@ -67,8 +67,13 @@ class NewMealActivity : AppCompatActivity() {
                 val max = storageRepository.getInt("range_max", 180)
                 val glucoseValue = binding.etCurrentGlucose.text.toString().toIntOrNull() ?: 100
                 
-                val status = UIHelper.getGlucoseStatus(glucoseValue, min, max)
+                val status = UIHelper.glucoseStatus(glucoseValue, min, max)
                 binding.tvCalculationResult.setTextColor(UIHelper.getStatusColor(status))
+
+                // Navigate to Reward Screen after a short delay to show the result
+                binding.btnCalculateBolus.postDelayed({
+                    UIHelper.navigateTo(this, RewardActivity::class.java)
+                }, 1500)
             } else {
                 binding.llResult.visibility = View.GONE
             }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- b7 · fundo espacial: gradiente night + estrelas -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape><gradient android:angle="270" android:startColor="@color/night_deep" android:endColor="@color/night_mid"/></shape>
+    </item>
+    <item android:drawable="@drawable/ic_stars_overlay"/>
+</layer-list>
